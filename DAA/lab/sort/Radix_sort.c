@@ -13,38 +13,41 @@ void count_sort(int arr[], int n, int pos)
 {
     if (n <= 0)
         return;
-    
+    // initialize the arrays
     int countArray[10] = {0};
     int outputArray[n];
+    
+    // count the frequncey of the digits.
     for (int i = 0; i < n; i++){
         int digit = (arr[i] / pos) % 10;
         countArray[digit]++;
-        
     } 
+    //verfication of count array
+    // printf("Count array after sorting by position %d: ", pos);
+    // print_array(countArray, 10);
     
-    printf("1st loop Count array after sorting by position %d: ", pos);
-    print_array(countArray, 10);
-
-    for (int i = 1; i < 10; i++)
-        countArray[i] += countArray[i - 1];
-    
-    printf("2nd loop Count array after sorting by position %d: ", pos);
-    print_array(countArray, 10);
-    
-    for (int i = n - 1; i >= 0; i--){
-        int digit = (arr[i] / pos) % 10;
-        outputArray[countArray[digit] - 1] = arr[i];
-        countArray[digit]--;
+    // build the output array
+    int j=0;
+    for (int i=0;i<10;i++){
+        while (countArray[i] > 0){
+            for (int k=0;k<n;k++){
+                if (((arr[k]/pos)%10)==i){
+                    outputArray[j] = arr[k];
+                    countArray[i]--;
+                    j++;
+                }
+            }
+        }
     }
-
+    
+    //copy the output array to arr.
     for (int i = 0; i < n; i++){
         arr[i] = outputArray[i];
     }
     
-    printf("Count array after sorting by position %d: ", pos);
-    print_array(countArray, 10);
-    printf("Output array after sorting by position %d: ", pos);
-    print_array(outputArray, n);
+    
+    // printf("Output array after sorting by position %d: ", pos);
+    // print_array(outputArray, n);
 }
 
 int getMax(int arr[], int n)
