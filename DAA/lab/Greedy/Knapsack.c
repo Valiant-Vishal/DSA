@@ -1,47 +1,49 @@
 #include <stdio.h>
 
-void Knapsack(float m, int n, float weight[], float profit[] , int menu) {
+void Knapsack(float m, int n, float weight[], float profit[]) {
     
-    if menu == 1 {
-        
+
+    float x[n];
+    for (int i=0;i<n;i++) {
+        x[i]=0.0;
     }
-        float x[n];
-        for (int i=0;i<n;i++) {
-            x[i]=0.0;
-        }
-        float u=m;
-        int i;
-        for (i=0;i<n;i++) {
-            if (weight[i]>u) break;
-            x[i]=1.0;u=u-weight[i];
-        }
-        if (i<n) {
-            x[i]=u/weight[i];
-        }
-    
-        printf("Bag : ");
-        for (int i = 0; i < n; i++) {
-            printf("%.2f%s ", x[i], (i < n - 1) ? ", " : "");
-        }
-        printf("\n");
+    float u=m;
+    int i;
+    for (i=0;i<n;i++) {
+        if (weight[i]>u) break;
+        x[i]=1.0;u=u-weight[i];
+    }
+    if (i<n) {
+        x[i]=u/weight[i];
+    }
+
+    printf("Bag : ");
+    for (int i = 0; i < n; i++) {
+        printf("%.2f%s ", x[i], (i < n - 1) ? ", " : "");
+    }
+    printf("\n");
 }
 
-int Sort(float arr[], float arr1[], int n) {
-    for (int j=0;j<n;j++) {
-        int item = arr[j];
-        int i=j-1;
-        while ((i>=1) && (item < arr[i])) {
-            arr[i+1] = arr[i];
-            arr1[i+1] = arr1[i];
-            int i = i-1;
+int Sorting(float arr[], float arr1[], float arr2[], int n) {
+    int gap = n / 2;
+    int P1,P2;
+    while (gap > 0) {
+        for (int i = gap; i < n; i++) {
+            float temp = arr[i];
+            float temp1 = arr1[i];
+            float temp2 = arr2[i];
+
+            int j = i;
+            while ((j >= gap) && (arr[j - gap] < temp)) {
+                arr[j] = arr[j - gap];
+                arr1[j] = arr1[j-gap];
+                j = j - gap;
+            }
+            arr[j] = temp;
+            arr1[j] = temp1;
+            arr2[j] = temp2;
         }
-        arr[i+1] = item;
-        arr1[i+1] = arr[j];
-    }
-    int i=0;
-    for (int k = n-1;k>=0;k--) {
-        arr[i] = arr[k];
-        i++;
+        gap = gap / 2;
     }
 }
 
@@ -53,6 +55,7 @@ int main() {
 
     float profit[n];
     float weight[n];
+    float ratio[n];
 
     printf("Enter the profit for the things :\n");
     for (int i=0;i<n;i++) {
@@ -69,9 +72,55 @@ int main() {
     printf("Enter the Knapscap capacity :");
     scanf("%f",&m);
 
-    
+    printf("By Weight :\n");
+    Sorting(weight, profit, ratio, n);
+    printf("Weight : ");
+    for (int i = 0; i < n; i++) {
+    printf("%.2f%s ", weight[i], (i < n - 1) ? ", " : "");
+    }
+    printf("\n");
+    printf("Profit : ");
+    for (int i = 0; i < n; i++) {
+    printf("%.2f%s ", profit[i], (i < n - 1) ? ", " : "");
+    }
+    printf("\n");
     Knapsack(m, n, weight, profit);
-    // printf("The Remaining Capacity : %f",maxWeight);
 
+    printf("By Profit :\n");
+    Sorting(profit, weight, ratio, n);
+    printf("Weight : ");
+    for (int i = 0; i < n; i++) {
+    printf("%.2f%s ", weight[i], (i < n - 1) ? ", " : "");
+    }
+    printf("\n");
+    printf("Profit : ");
+    for (int i = 0; i < n; i++) {
+    printf("%.2f%s ", profit[i], (i < n - 1) ? ", " : "");
+    }
+    printf("\n");
+    Knapsack(m, n, weight, profit);
+
+    
+    for (int i = 0;i < n;i++) {
+        ratio[i] = profit[i]/weight[i];
+    }
+    printf("Ratio : ");
+    for (int i = 0; i < n; i++) {
+    printf("%.2f%s ", ratio[i], (i < n - 1) ? ", " : "");
+    }
+    Sorting(ratio, profit, weight, n);
+    printf("\nBy Ratio :\n");
+    Sorting(profit, weight, ratio, n);
+    printf("Weight : ");
+    for (int i = 0; i < n; i++) {
+    printf("%.2f%s ", weight[i], (i < n - 1) ? ", " : "");
+    }
+    printf("\n");
+    printf("Profit : ");
+    for (int i = 0; i < n; i++) {
+    printf("%.2f%s ", profit[i], (i < n - 1) ? ", " : "");
+    }
+    printf("\n");
+    Knapsack(m, n, weight, profit);
 
 }
