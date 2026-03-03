@@ -1,18 +1,26 @@
 #include <stdio.h>
 
 int search(int array[], int n, int x) {
-  for (int i = 0; i < n; i++)
-    if (array[i] == x)
-      return i;
-  return -1;
+    int i = 0;
+    
+
+    while (array[i] != x) {
+        i++;
+    }
+    if (i < n) {
+        return i;
+    } else {
+        return -1;
+    }
 }
+
 
 int main() {
   int x,s;
   printf("Enter the no. of elements you want to enter:");
   scanf("%d",&s);
   int arr[s];
-  for (int i;i<s;i++){
+  for (int i=0;i<s;i++){
     printf("Enter element %d:",i+1);
     scanf("%d", &arr[i]);
   }

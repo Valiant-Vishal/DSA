@@ -3,7 +3,7 @@
 
 int binarySearch(int arr[], int i, int l, int x) {
     if (l==i){
-        if (x == arr[i]) return i;
+        if (x == arr[i]) return x;
         else return 0;
     }
 

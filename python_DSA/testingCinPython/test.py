@@ -2,7 +2,7 @@ import subprocess
 
 # 1. We use the path you found in the screenshot
 # The 'r' before the quote is important—it handles the backslashes correctly!
-gcc_path = r"c:\msys64\ucrt64\bin\gcc.exe"
+
 
 print(f"Compiling using: {gcc_path}")
 

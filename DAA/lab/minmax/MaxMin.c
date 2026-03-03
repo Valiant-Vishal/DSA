@@ -21,7 +21,7 @@ void MaxMin(int arr[], int i, int j, int *max, int *min) {
         int mid = (i + j) / 2;
         
         
-        MaxMin(arr, i, mid, max, min);
+        MaxMin(arr, i, mid, max, min);  
         
         MaxMin(arr, mid + 1, j, &max1, &min1);
 

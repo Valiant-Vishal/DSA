@@ -15,7 +15,7 @@ int FibSearch(int array[], int n, int x)
         fibM = fibM_2 + fibM_1;
     }
     int offset = -1;
-    int k = 0;
+    //int k = 0;
     while (fibM > 1)
     {
         
