@@ -1,31 +1,40 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int Merge(int arr[], int LB, int mid, int HB) {
-    int i = LB, j = mid + 1, k = LB;
-    int B[HB + 1];
-
-    while (i <= mid && j <= HB) {
-        if (arr[i] <= arr[j]) {
-            B[k++] = arr[i++];
-        } else {
-            B[k++] = arr[j++];
+int Merge(int arr[], int Low, int mid, int High) {
+    int B[High];
+    int I = Low;
+    int N = Low;
+    int J = mid+1;
+    while ((N <= mid) && (J <= High)) {
+        if (arr[N] <= arr[J]) {
+            
+            B[I] = arr[N];
+            N++;
+        }
+        else {
+           
+            B[I] = arr[J];
+            J++;
+        }
+        I++;
+    }
+    if (N > mid) {
+        for (int k=J; k<=High; k++) {
+            B[I] = arr[k];
+            I++;
+        }
+    }
+    else {
+        for (int k=N; k<=mid; k++) {
+            B[I] = arr[k];
+            I++;
         }
     }
 
-    while (i <= mid) {
-        B[k++] = arr[i++];
+    for (int k=Low ; k <= High; k++) {
+        arr[k] = B[k];
     }
-
-    while (j <= HB) {
-        B[k++] = arr[j++];
-    }
-
-    for (i = LB; i <= HB; i++) {
-        arr[i] = B[i];
-    }
-    
-    return 0;
 }
 
 int MergeSort(int arr[], int LB, int HB) {
