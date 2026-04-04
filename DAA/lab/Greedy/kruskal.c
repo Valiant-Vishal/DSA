@@ -62,3 +62,20 @@ void kruskal(int n, int cost[MAX][MAX]) {
         printf("\nMinimum Cost: %d\n", mincost);
     }
 }
+
+int main() {
+    int n = 5;
+    int cost[MAX][MAX] = {
+        {INF, INF, INF, INF, INF, INF},
+        {INF, 0,   10,  INF, 30,  100},
+        {INF, INF, 0,   50,  INF, INF},
+        {INF, INF, INF, 0,   INF, 10},
+        {INF, INF, INF, 20,  0,   60},
+        {INF, INF, INF, INF, INF, 0}
+    };
+
+    printf("Kruskal's Algorithm - Minimum Spanning Tree\n");
+    kruskal(n, cost);
+
+    return 0;
+}

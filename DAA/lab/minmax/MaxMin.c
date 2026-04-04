@@ -39,7 +39,7 @@ int main() {
     if (scanf("%d", &n) != 1 || n <= 0) return 1;
 
     int arr[n];
-    printf("Enter the elements: ");
+    printf("Enter the element: ");
     for (int i = 0; i < n; i++) {
         scanf("%d", &arr[i]);
     }

@@ -102,42 +102,28 @@ void strassen(int n, int A[n][n], int B[n][n], int C[n][n]) {
 
 // Main function to test the 4x4 matrix
 int main() {
-    int n = 9;
+    int n = 2;
     
     // 4x4 Matrix A
-    int A[9][9] = {
-        {1, 2, 3, 4, 1, 1, 1, 1, 1},
-        {5, 6, 7, 8, 1, 1, 1, 1, 1},
-        {9, 10, 11, 12, 1, 1, 1, 1, 1},
-        {13, 14, 15, 16, 1, 1, 1, 1, 1},
-        {1, 2, 3, 4, 1, 1, 1, 1, 1},
-        {5, 6, 7, 8, 1, 1, 1, 1, 1},
-        {9, 10, 11, 12, 1, 1, 1, 1, 1},
-        {13, 14, 15, 16, 1, 1, 1, 1, 1},
-        {13, 14, 15, 16, 1, 1, 1, 1, 1}
+    int A[2][2] = {
+        {9, 8},
+        {7, 6}
     };
     
     // 4x4 Matrix B
-    int B[9][9] = {
-        {2, 2, 1, 3, 1, 1, 1, 1, 1},
-        {1, 2, 2, 1, 1, 1, 1, 1, 1},
-        {2, 1, 2, 2, 1, 1, 1, 1, 1},
-        {3, 2, 1, 2, 1, 1, 1, 1, 1},
-        {2, 2, 1, 3, 1, 1, 1, 1, 1},
-        {1, 2, 2, 1, 1, 1, 1, 1, 1},
-        {2, 1, 2, 2, 1, 1, 1, 1, 1},
-        {3, 2, 1, 2, 1, 1, 1, 1, 1},
-        {3, 2, 1, 2, 1, 1, 1, 1, 1}
+    int B[2][2] = {
+        {4, 3},
+        {2, 1}
     };
     
     // Result Matrix C, initialized to 0
-    int C[4][4] = {0};
+    int C[2][2] = {0};
 
     // Run Strassen's algorithm
     strassen(n, A, B, C);
 
     // Print the result
-    printf("Resulting 4x4 Matrix:\n");
+    printf("Resulting 2x2 Matrix:\n");
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
             printf("%d\t", C[i][j]);
