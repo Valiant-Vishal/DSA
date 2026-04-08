@@ -2,7 +2,12 @@
 #include <limits.h>
 
 #define MAX 100
-#define INF 99999
+#define INF 999
+#define NODES 12
+#define STAGES 5
+
+int cost_matrix[MAX][MAX];
+int dist[MAX], d[MAX], path[MAX];
 
 int cost_matrix[MAX][MAX];
 int dist[MAX], d[MAX], path[MAX];
@@ -54,6 +59,7 @@ void BGraph(int n, int k) {
     for (int j = k - 1; j >= 2; j--) {
         path[j] = bd[path[j + 1]];
     }
+    printf("Minimum Cost: %d\n", bcost[n]);
 }
 
 void printPath(int k) {
@@ -65,28 +71,28 @@ void printPath(int k) {
 }
 
 int main() {
-    int n, k, edges;
+    int n = NODES;
+    int k = STAGES;
 
-    printf("Enter number of vertices and stages: ");
-    scanf("%d %d", &n, &k);
-
-    // Initialize cost matrix with Infinity
+    // Initialize Matrix
     for (int i = 1; i <= n; i++)
         for (int j = 1; j <= n; j++)
-            cost_matrix[i][j] = INF;
+            cost_matrix[i][j] = (i == j) ? 0 : INF;
 
-    printf("Enter number of edges: ");
-    scanf("%d", &edges);
 
-    printf("Enter edges (u v weight):\n");
-    for (int i = 0; i < edges; i++) {
-        int u, v, w;
-        scanf("%d %d %d", &u, &v, &w);
-        cost_matrix[u][v] = w;
-        printf("next\n");
-    }
+    cost_matrix[1][2] = 9; cost_matrix[1][3] = 7; cost_matrix[1][4] = 3; cost_matrix[1][5] = 2;
+    cost_matrix[2][6] = 4; cost_matrix[2][7] = 2; cost_matrix[2][8] = 1;
+    cost_matrix[3][6] = 2; cost_matrix[3][7] = 7;
+    cost_matrix[4][8] = 11;
+    cost_matrix[5][7] = 11; cost_matrix[5][8] = 8;
+    cost_matrix[6][9] = 6; cost_matrix[6][10] = 5;
+    cost_matrix[7][9] = 4; cost_matrix[7][10] = 3;
+    cost_matrix[8][10] = 5; cost_matrix[8][11] = 6;
+    cost_matrix[9][12] = 4;
+    cost_matrix[10][12] = 2;
+    cost_matrix[11][12] = 5;
 
-    printf("\n--- Using Forward Approach ---\n");
+    printf("--- Using Forward Approach ---\n");
     FGraph(n, k);
     printf("Minimum Cost: %d\n", dist[1]);
     printPath(k);
